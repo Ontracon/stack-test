@@ -19,17 +19,16 @@ jobs:
         with:
           path: '${{ github.workspace }}/stacks'
 
-  test:
+  stack_test:
     name: Test Stacks order
     runs-on: [otc-static]
+    needs: get_stacks
     strategy:
       fail-fast: false
       max-parallel: 1
       matrix:
         stacks: ${{ fromjson(needs.get_stacks.outputs.dirs) }}
-
     steps:
-      - name: Ouput
-        id: get_project
+      - name: ${{ matrix.stacks }}
         run: |
           echo "Stackset: ${{ matrix.stacks }}"
