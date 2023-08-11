@@ -2,20 +2,31 @@ on:
   push:
 
 jobs:
+  jobs:
+
+  get_stacks:
+    name: Get Stacks
+    environment: INT
+    runs-on: [Linux]
+    outputs:
+      files: ${{ steps.files.outputs.files }}
+      dirs: ${{ steps.files.outputs.dirs }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Test - Helper
+        id: files
+        uses: otc-code/gh-actions/helper@main
+        with:
+          path: '${{ github.workspace }}/stacks'
+
   test:
-    name: Test Matrix order
+    name: Test Stacks order
     runs-on: [otc-static]
     strategy:
       fail-fast: false
       max-parallel: 1
       matrix:
-        stacks:
-          - 0_BASE
-          - 1_NET
-          - 2_INF_DB
-          - 3_INF_S3
-          - 4_SYS_VM
-          - 5_APP_ECS
+        stacks: ${{ fromjson(needs.get_stacks.outputs.dirs) }}
 
     steps:
       - name: Ouput
