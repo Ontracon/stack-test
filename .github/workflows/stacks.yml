@@ -2,8 +2,6 @@ on:
   push:
 
 jobs:
-  jobs:
-
   get_stacks:
     name: Get Stacks
     environment: INT
