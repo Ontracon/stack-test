@@ -10,7 +10,7 @@ jobs:
     outputs:
       files: ${{ steps.files.outputs.files }}
       dirs-asc: ${{ steps.files.outputs.dirs }}
-      dirs-dsc: ${{ steps.files.outputs.dirs-desc }}
+      dirs-dsc: ${{ steps.files.outputs.dirs-desc}}
     steps:
       - uses: actions/checkout@v3
       - name: Test - Helper
@@ -41,7 +41,7 @@ jobs:
       fail-fast: false
       max-parallel: 1
       matrix:
-        stacks: ${{ fromjson(needs.get_stacks.outputs.dsc) }}
+        stacks: ${{ fromjson(needs.get_stacks.outputs.dirs-dsc) }}
     steps:
       - name: ${{ matrix.stacks }}
         run: |
