@@ -32,16 +32,16 @@ jobs:
         run: |
           echo "Stackset: ${{ matrix.stacks }}"
 
-stack_test_deploy:
-  name: Stack Deploy
-  runs-on: [otc-static]
-  needs: get_stacks
-  strategy:
-    fail-fast: false
-    max-parallel: 1
-    matrix:
-      stacks: ${{ fromjson(needs.get_stacks.outputs.dirs-desc) }}
-  steps:
-    - name: ${{ matrix.stacks }}
-      run: |
-        echo "Stackset: ${{ matrix.stacks }}"
+  stack_test_destroy:
+    name: Stack Destroy
+    runs-on: [otc-static]
+    needs: get_stacks
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        stacks: ${{ fromjson(needs.get_stacks.outputs.dirs-desc) }}
+    steps:
+      - name: ${{ matrix.stacks }}
+        run: |
+          echo "Stackset: ${{ matrix.stacks }}"
