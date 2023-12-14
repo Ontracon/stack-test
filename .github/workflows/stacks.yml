@@ -22,7 +22,7 @@ jobs:
 
   stack_test_deploy:
     name: Stack Deploy
-    runs-on: [otc-static]
+    runs-on: [Linux]
     needs: get_stacks
     strategy:
       fail-fast: false
