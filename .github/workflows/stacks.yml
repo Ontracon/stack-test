@@ -1,6 +1,7 @@
 name: Deployment
 on:
   push:
+  workflow_dispatch:
 
 jobs:
   get_stacks:
